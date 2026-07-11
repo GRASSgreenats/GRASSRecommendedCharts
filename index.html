@@ -28,7 +28,9 @@
 
         <div class="alert alert-success mb-3" role="alert">
             <p>GRASSのお気に入りだったり、よく擦っている譜面のまとめです。次期難易度表フォーマット対応。</p>
-            <p>楽曲/譜面の入手URLについては、下記スプレッドシート内にて記載しております。</p>
+            <p>簡易的な楽曲/譜面の入手リンクを難易度表本体に入れました。</p>
+            <p>簡易的なものなので同梱とか入手困難な差分にもハイパーリンクが生成されまくっています。</p>
+            <p>楽曲/譜面の詳細なURL状態については、下記スプレッドシート内にて記載しております。</p>
             <p>https://docs.google.com/spreadsheets/d/1DNctNYMTWeNbnqf17Qh3KwSUad9XPK4XIHuLYVLZLO0/edit?usp=sharing</p>
             <p>ただし、それぞれのURLの入手性については保証しません。</p>
             <p>　</p>
@@ -37,7 +39,7 @@
             <p>https://docs.google.com/spreadsheets/d/1Dw7Ci8pe59S16oQ_EkIaF0qGG-fiR2cEKb-GFnY4wgA/edit?usp=sharing</p>
             <p>難易度表の読み込みと表示に数秒かかります。</p>
             <hr>
-            <p class="mb-0">easyは☆1～10、無印はsl0～12、plusはst0～12に対応。個人の裁量で難易度設定が他の難易度表と上下している場合があります。</p>
+            <p class="mb-0">easyは☆1～10、無印はsl0(+sr12)～12、plusはst0～12に対応。個人の裁量で難易度設定が他の難易度表と上下している場合があります。</p>
             <p>各区分の『特殊』は、LNや連皿、ソフランなどが強烈で、地力でない部分がクリアに極めて大きく影響する可能性の高い譜面が入っています。</p>
         </div>
 
@@ -69,7 +71,7 @@
                 for (var i = 0; i < info.length; i++) {
                     if (x != info[i].level) {
                         if (obj_sep != null) {
-                            obj_sep.html("<td colspan='4'>" + "<b>" + mark + x + " (" + count +
+                            obj_sep.html("<td colspan='6'>" + "<b>" + mark + x + " (" + count +
                                 "譜面)</b></td>");
                         }
                         obj_sep = $("<tr class='table-dark' style='text-align:center' id='" + mark + info[i].level +
@@ -85,7 +87,7 @@
                     $("<td width=10%'>" + mark + x + "</td>").appendTo(str);
 
                     // Title
-                    $("<td width='37%'>" +
+                    $("<td width='33%'>" +
                         "<a href='https://mocha-repository.info/song.php?sha256=" + info[
                             i]
                         .sha256 + "' target='_blank'>" + info[i].title + "</a></td>").appendTo(str);
@@ -93,8 +95,14 @@
                     // Artist
                     $("<td width='25%'>" + info[i].artist + "</td>").appendTo(str);
 
+                    // 本体DL
+　　　　　　　　　　　$("<td width='4%'>" + "<a href='" + info[i].url + "'target='_blank'>" + "本体" + "</a></td>").appendTo(str);
+
+                    // 差分DL
+　　　　　　　　　　　$("<td width='4%'>" + "<a href='" + info[i].url_diff + "'target='_blank'>" + "差分" + "</a></td>").appendTo(str);
+
                     // Comment
-                    $("<td width='28%'>" + info[i].comment + "</td>").appendTo(str);
+                    $("<td width='24%'>" + info[i].comment + "</td>").appendTo(str);
                     str.appendTo(obj);
                     count++;
 
@@ -102,7 +110,7 @@
                 $("</tbody>").appendTo(obj);
 
                 if (obj_sep != null) {
-                    obj_sep.html("<td class='table-dark' style='text-align:center' colspan='4'>" + "<b>" + mark + x +
+                    obj_sep.html("<td class='table-dark' style='text-align:center' colspan='6'>" + "<b>" + mark + x +
                         " (" + count + "譜面)</b></td>");
                 }
             }
